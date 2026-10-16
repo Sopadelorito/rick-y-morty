@@ -1,0 +1,161 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#07110d">
+  <title>Rick & Morty | Multiverse Explorer</title>
+  <link rel="stylesheet" href="diseño.css">
+  <link rel="preconnect" href="https://rickandmortyapi.com">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <div class="stars" aria-hidden="true"></div>
+
+  <header class="topbar">
+    <a href="#" class="brand">
+      <span class="brand-icon">🛸</span>
+      <span>R&M<span class="brand-accent"> EXPLORER</span></span>
+    </a>
+    <span class="api-status">
+      <span class="status-dot"></span> MULTIVERSO CONECTADO
+    </span>
+  </header>
+
+  <main class="container">
+    <section class="hero">
+      <div class="hero-tag">CENTRO DE INVESTIGACIÓN INTERDIMENSIONAL</div>
+      <h1>EXPLORE THE <span>MULTIVERSE</span></h1>
+      <p>Encuentra personajes, descubre planetas y explora cada dimensión.</p>
+
+      <div class="hero-stats">
+        <div class="stat">
+          <span class="stat-number" id="total-count">---</span>
+          <span class="stat-label">PERSONAJES</span>
+        </div>
+        <div class="stat">
+          <span class="stat-number">∞</span>
+          <span class="stat-label">DIMENSIONES</span>
+        </div>
+        <div class="stat">
+          <span class="stat-number">S01-S05+</span>
+          <span class="stat-label">EPISODIOS</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="explorer">
+      <div class="section-heading">
+        <div>
+          <span class="eyebrow">BASE DE DATOS</span>
+          <h2>Archivo de personajes</h2>
+        </div>
+        <span id="results-count" class="results-count">Cargando datos...</span>
+      </div>
+
+      <form id="filter-form" class="filters">
+        <div class="search-box">
+          <span class="search-icon" aria-hidden="true">⌕</span>
+          <input
+            id="search"
+            type="search"
+            placeholder="Buscar personaje por nombre..."
+            autocomplete="off"
+            aria-label="Buscar personaje por nombre"
+          >
+          <kbd>↵</kbd>
+        </div>
+
+        <div class="filter-grid">
+          <label class="filter-field">
+            <span>ESPECIE</span>
+            <select id="species">
+              <option value="">Todas las especies</option>
+              <option value="Human">Humano</option>
+              <option value="Alien">Alienígena</option>
+              <option value="Humanoid">Humanoide</option>
+              <option value="Robot">Robot</option>
+              <option value="Animal">Animal</option>
+              <option value="Mythological Creature">Criatura mitológica</option>
+              <option value="Poopybutthole">Poopybutthole</option>
+              <option value="Cronenberg">Cronenberg</option>
+              <option value="Disease">Enfermedad</option>
+            </select>
+          </label>
+
+          <label class="filter-field">
+            <span>ESTADO</span>
+            <select id="status">
+              <option value="">Todos los estados</option>
+              <option value="alive">Vivo</option>
+              <option value="dead">Muerto</option>
+              <option value="unknown">Desconocido</option>
+            </select>
+          </label>
+
+          <button type="submit" class="btn-search">
+            <span>⌕</span> BUSCAR
+          </button>
+
+          <button type="button" id="reset-btn" class="btn-reset">
+            ↺ LIMPIAR
+          </button>
+        </div>
+      </form>
+
+      <div id="active-filters" class="active-filters"></div>
+
+      <div id="loading" class="loading" hidden>
+        <div class="portal"></div>
+        <p>Abriendo portal interdimensional...</p>
+      </div>
+
+      <div id="error-message" class="error-message" hidden></div>
+
+      <div id="characters-grid" class="characters-grid"
+           aria-live="polite"></div>
+
+      <div id="empty-state" class="empty-state" hidden>
+        <div class="empty-emoji">🛸</div>
+        <h3>¡Wubba Lubba Dub Dub!</h3>
+        <p>No encontramos personajes en esta dimensión.</p>
+        <button type="button" id="empty-reset" class="btn-search">
+          Reiniciar búsqueda
+        </button>
+      </div>
+
+      <nav id="pagination" class="pagination"
+           aria-label="Paginación de personajes">
+        <button id="prev-btn" class="page-btn" type="button">
+          ← Anterior
+        </button>
+        <span id="page-info" class="page-info">Página 1</span>
+        <button id="next-btn" class="page-btn" type="button">
+          Siguiente →
+        </button>
+      </nav>
+
+      <p class="footer-note">
+        DATOS PROPORCIONADOS POR
+        <a href="https://rickandmortyapi.com/documentation"
+           target="_blank" rel="noopener noreferrer">
+          RICK AND MORTY API
+        </a>
+      </p>
+    </section>
+  </main>
+
+  <footer>
+    <p>WUBBA LUBBA DUB DUB! <span>✦</span> EXPLORA BAJO TU PROPIO RIESGO</p>
+  </footer>
+
+  <dialog id="character-modal" class="character-modal">
+    <button id="close-modal" class="close-modal"
+            type="button" aria-label="Cerrar">✕</button>
+    <div id="modal-content"></div>
+  </dialog>
+</body>
+</html>
